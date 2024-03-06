@@ -1,4 +1,5 @@
 package com.example.tic_tak;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -111,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void Jivan() {
+
     }
 
     private void performAction(ImageView  imageView, int selectedBoxPosition) {
