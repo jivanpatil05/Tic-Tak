@@ -1,175 +1,192 @@
 package com.example.tic_tak;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.appcompat.app.AppCompatActivity;
-
-import java.util.Arrays;
+import com.example.tic_tak.databinding.ActivityMainBinding;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    boolean gameActive = true;
 
-    int activePlayer = 0;
-    int[] gameState = {2, 2, 2, 2, 2, 2, 2, 2, 2};
-
-    int[][] winPositions = {{0, 1, 2}, {3, 4, 5}, {6, 7, 8},
-            {0, 3, 6}, {1, 4, 7}, {2, 5, 8},
-            {0, 4, 8}, {2, 4, 6}};
-
-    public static int counter = 0;
-
-
-//    public void playerTap(View view) {
-//        ImageView img = (ImageView) view;
-//        int tappedImage = Integer.parseInt(img.getTag().toString());
-//
-//
-//        if (gameState[tappedImage] == 2) {
-//            counter++;
-//            if (counter == 9) {
-//                gameActive = false;
-//            }
-//            gameState[tappedImage] = activePlayer;
-//
-//            if (activePlayer == 0) {
-//                img.setImageResource(R.drawable.xpng);
-//                activePlayer = 1;
-//                TextView status = findViewById(R.id.status);
-//                status.setText("O's Turn - Tap to play");
-//               // Toast.makeText(this, " O's Turn ", Toast.LENGTH_SHORT).show();
-//            } else {
-//                img.setImageResource(R.drawable.opng);
-//                activePlayer = 0;
-//                TextView status = findViewById(R.id.status);
-//                status.setText("X's Turn - Tap to play");
-//               // Toast.makeText(this, " x's Turn ", Toast.LENGTH_SHORT).show();
-//
-//            }
-//        }
-//        int flag = 0;
-//        if (counter > 4) {
-//            for (int[] winPosition : winPositions) {
-//                if (gameState[winPosition[0]] == gameState[winPosition[1]] && gameState[winPosition[1]] == gameState[winPosition[2]] && gameState[winPosition[0]] != 2) {
-//                    flag = 1;
-//                    String winnerStr;
-//                    if (gameState[winPosition[0]] == 0) {
-//                        winnerStr = "X has won";
-//                        Toast.makeText(this, "X has won", Toast.LENGTH_SHORT).show();
-//                    } else {
-//                        winnerStr = "O has won";
-//                        Toast.makeText(this, "O has won", Toast.LENGTH_SHORT).show();
-//                    }
-//
-//                    TextView status = findViewById(R.id.status);
-//                    status.setText(winnerStr);
-//                }
-//            }
-//            if (counter == 9 && flag == 0) {
-//                TextView status = findViewById(R.id.status);
-//                status.setText("Match Draw");
-//            }
-//        }
-//
-//    }
-public void playerTap(View view) {
-    if (!gameActive) { // Check if the game is already won
-        return; // If so, return without taking any action
-    }
-
-    ImageView img = (ImageView) view;
-    int tappedImage = Integer.parseInt(img.getTag().toString());
-
-    if (gameState[tappedImage] == 2) {
-        counter++;
-        gameState[tappedImage] = activePlayer;
-
-        if (activePlayer == 0) {
-            img.setImageResource(R.drawable.xpng);
-            activePlayer = 1;
-            TextView status = findViewById(R.id.status);
-            status.setText("O's Turn - Tap to play");
-        } else {
-            img.setImageResource(R.drawable.opng);
-            activePlayer = 0;
-            TextView status = findViewById(R.id.status);
-            status.setText("X's Turn - Tap to play");
-        }
-    }
-
-    // Check win condition
-    int flag = 0;
-//    for (int[] winPosition : winPositions) {
-//        if (gameState[winPosition[0]] == gameState[winPosition[1]] &&
-//                gameState[winPosition[1]] == gameState[winPosition[2]] &&
-//                gameState[winPosition[0]] != 2) {
-//            flag = 1;
-//            String winnerStr = (gameState[winPosition[0]] == 0) ? "X has won" : "O has won";
-//            TextView status = findViewById(R.id.status);
-//            status.setText(winnerStr);
-//            gameActive = false; // Set gameActive to false when a player wins
-//            break; // No need to continue checking for win conditions
-//        }
-//    }
-    for (int[] winPosition : winPositions) {
-        if (gameState[winPosition[0]] == gameState[winPosition[1]] && gameState[winPosition[1]] == gameState[winPosition[2]] && gameState[winPosition[0]] != 2) {
-            flag = 1;
-            String winnerStr;
-            if (gameState[winPosition[0]] == 0) {
-                winnerStr = "X has won";
-                Toast.makeText(this, "X has won", Toast.LENGTH_SHORT).show();
-            } else {
-                winnerStr = "O has won";
-                Toast.makeText(this, "O has won", Toast.LENGTH_SHORT).show();
-            }
-
-            TextView status = findViewById(R.id.status);
-            status.setText(winnerStr);
-            gameActive = false; // Set gameActive to false when a player wins
-            break; // No need to continue checking for win conditions
-        }
-    }
-
-    // Check for draw condition
-    if (counter == 9 && flag == 0) {
-        TextView status = findViewById(R.id.status);
-        status.setText("Match Draw");
-        gameActive = false; // Set gameActive to false when the game is drawn
-    }
-}
-
-
-    // reset the game
-    public void gameReset(View view) {
-        gameActive = true;
-        activePlayer = 0;
-        Arrays.fill(gameState, 2);
-
-        ((ImageView) findViewById(R.id.imageView0)).setImageResource(0);
-        ((ImageView) findViewById(R.id.imageView1)).setImageResource(0);
-        ((ImageView) findViewById(R.id.imageView2)).setImageResource(0);
-        ((ImageView) findViewById(R.id.imageView3)).setImageResource(0);
-        ((ImageView) findViewById(R.id.imageView4)).setImageResource(0);
-        ((ImageView) findViewById(R.id.imageView5)).setImageResource(0);
-        ((ImageView) findViewById(R.id.imageView6)).setImageResource(0);
-        ((ImageView) findViewById(R.id.imageView7)).setImageResource(0);
-        ((ImageView) findViewById(R.id.imageView8)).setImageResource(0);
-
-        TextView status = findViewById(R.id.status);
-        status.setText("X's Turn - Tap to play");
-    }
-
-    public void Resetbtn(View view) {
-        gameReset(view);
-    }
-
+    ActivityMainBinding binding;
+    private final List<int[]> combinationList = new ArrayList<>();
+    private int[] boxPositions = {0,0,0,0,0,0,0,0,0}; //9 zero
+    private int playerTurn = 1;
+    private int totalSelectedBoxes = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        combinationList.add(new int[] {0,1,2});
+        combinationList.add(new int[] {3,4,5});
+        combinationList.add(new int[] {6,7,8});
+        combinationList.add(new int[] {0,3,6});
+        combinationList.add(new int[] {1,4,7});
+        combinationList.add(new int[] {2,5,8});
+        combinationList.add(new int[] {2,4,6});
+        combinationList.add(new int[] {0,4,8});
+
+
+        binding.image1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isBoxSelectable(0)){
+                    performAction((ImageView) view, 0);
+                }
+            }
+        });
+
+        binding.image2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isBoxSelectable(1)){
+                    performAction((ImageView) view, 1);
+                }
+            }
+        });
+        binding.image3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isBoxSelectable(2)){
+                    performAction((ImageView) view, 2);
+                }
+            }
+        });
+        binding.image4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isBoxSelectable(3)){
+                    performAction((ImageView) view, 3);
+                }
+            }
+        });
+        binding.image5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isBoxSelectable(4)){
+                    performAction((ImageView) view, 4);
+                }
+            }
+        });
+        binding.image6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isBoxSelectable(5)){
+                    performAction((ImageView) view, 5);
+                }
+            }
+        });
+        binding.image7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isBoxSelectable(6)){
+                    performAction((ImageView) view, 6);
+                }
+            }
+        });
+        binding.image8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isBoxSelectable(7)){
+                    performAction((ImageView) view, 7);
+                }
+            }
+        });
+        binding.image9.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isBoxSelectable(8)){
+                    performAction((ImageView) view, 8);
+                }
+            }
+        });
+
+    }
+
+    private void performAction(ImageView  imageView, int selectedBoxPosition) {
+        boxPositions[selectedBoxPosition] = playerTurn;
+
+        if (playerTurn == 1) {
+            imageView.setImageResource(R.drawable.xpng);
+            if (checkResults()) {
+                ResultDialog resultDialog = new ResultDialog(MainActivity.this, binding.playerOneName.getText().toString() + " is a Winner!", MainActivity.this);
+                resultDialog.setCancelable(false);
+                resultDialog.show();
+            } else if(totalSelectedBoxes == 9) {
+                ResultDialog resultDialog = new ResultDialog(MainActivity.this, "Match Draw", MainActivity.this);
+                resultDialog.setCancelable(false);
+                resultDialog.show();
+            } else {
+                changePlayerTurn(2);
+                totalSelectedBoxes++;
+            }
+        } else {
+            imageView.setImageResource(R.drawable.opng);
+            if (checkResults()) {
+                ResultDialog resultDialog = new ResultDialog(MainActivity.this, binding.playerTwoName.getText().toString() + " is a Winner!", MainActivity.this);
+                resultDialog.setCancelable(false);
+                resultDialog.show();
+            } else if(totalSelectedBoxes == 9) {
+                ResultDialog resultDialog = new ResultDialog(MainActivity.this, "Match Draw", MainActivity.this);
+                resultDialog.setCancelable(false);
+                resultDialog.show();
+            } else {
+                changePlayerTurn(1);
+                totalSelectedBoxes++;
+            }
+        }
+    }
+
+    private void changePlayerTurn(int currentPlayerTurn) {
+        playerTurn = currentPlayerTurn;
+        if (playerTurn == 1) {
+            binding.playerOneLayout.setBackgroundResource(R.drawable.black_border);
+            binding.playerTwoLayout.setBackgroundResource(R.drawable.white_box);
+        } else {
+            binding.playerTwoLayout.setBackgroundResource(R.drawable.black_border);
+            binding.playerOneLayout.setBackgroundResource(R.drawable.white_box);
+        }
+    }
+
+    private boolean checkResults(){
+        boolean response = false;
+        for (int i = 0; i < combinationList.size(); i++){
+            final int[] combination = combinationList.get(i);
+
+            if (boxPositions[combination[0]] == playerTurn && boxPositions[combination[1]] == playerTurn &&
+                    boxPositions[combination[2]] == playerTurn) {
+                response = true;
+            }
+        }
+        return response;
+    }
+
+    private boolean isBoxSelectable(int boxPosition) {
+        boolean response = false;
+        if (boxPositions[boxPosition] == 0) {
+            response = true;
+        }
+        return response;
+    }
+
+    public void restartMatch(){
+        boxPositions = new int[] {0,0,0,0,0,0,0,0,0}; //9 zero
+        playerTurn = 1;
+        totalSelectedBoxes = 1;
+
+        binding.image1.setImageResource(R.drawable.white_box);
+        binding.image2.setImageResource(R.drawable.white_box);
+        binding.image3.setImageResource(R.drawable.white_box);
+        binding.image4.setImageResource(R.drawable.white_box);
+        binding.image5.setImageResource(R.drawable.white_box);
+        binding.image6.setImageResource(R.drawable.white_box);
+        binding.image7.setImageResource(R.drawable.white_box);
+        binding.image8.setImageResource(R.drawable.white_box);
+        binding.image9.setImageResource(R.drawable.white_box);
     }
 }
-
