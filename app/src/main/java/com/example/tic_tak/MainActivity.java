@@ -21,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        
+        Jivan();
 
         CombinationList.add(new int[] {0,1,2});
         CombinationList.add(new int[] {3,4,5});
@@ -108,6 +110,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void Jivan() {
+    }
+
     private void performAction(ImageView  imageView, int selectedBoxPosition) {
         boxPositions[selectedBoxPosition] = currentPlayerTurn;
 
@@ -173,6 +178,8 @@ public class MainActivity extends AppCompatActivity {
         }
         return response;
     }
+    
+    
 
     public void restartMatch(){
         boxPositions = new int[] {0,0,0,0,0,0,0,0,0}; //9 zero
