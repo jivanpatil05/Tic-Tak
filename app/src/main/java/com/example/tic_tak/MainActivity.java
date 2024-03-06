@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
     private final List<int[]> ResultList = new ArrayList<>();
     private int[] boxPositions = {0,0,0,0,0,0,0,0,0}; //9 zero
-    private int currentPlayerTurn = 1;
+    private int playerTurn = 1;
     private int totalSelectedBoxes = 1;
 
     @Override
@@ -113,9 +113,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void performAction(ImageView  imageView, int selectedBoxPosition) {
-        boxPositions[selectedBoxPosition] = currentPlayerTurn;
+        boxPositions[selectedBoxPosition] = playerTurn;
 
-        if (currentPlayerTurn == 1) {
+        if (playerTurn == 1) {
             imageView.setImageResource(R.drawable.xpng);
             if (checkResults()) {
                 ResultDialog resultDialog = new ResultDialog(MainActivity.this, binding.playerOneName.getText().toString() + " is a Winner!", MainActivity.this);
@@ -147,8 +147,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void changePlayerTurn(int currentPlayerTurn) {
-        this.currentPlayerTurn = currentPlayerTurn;
-        if (this.currentPlayerTurn == 1) {
+        this.playerTurn = currentPlayerTurn;
+        if (this.playerTurn == 1) {
             binding.playerOneLayout.setBackgroundResource(R.drawable.black_border);
             binding.playerTwoLayout.setBackgroundResource(R.drawable.white_box);
         } else {
@@ -162,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < ResultList.size(); i++){
             final int[] combination = ResultList.get(i);
 
-            if (boxPositions[combination[0]] == currentPlayerTurn && boxPositions[combination[1]] == currentPlayerTurn && boxPositions[combination[2]] == currentPlayerTurn) {
+            if (boxPositions[combination[0]] == playerTurn && boxPositions[combination[1]] == playerTurn && boxPositions[combination[2]] == playerTurn) {
                 response = true;
             }
 
@@ -180,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void restartMatch(){
         boxPositions = new int[] {0,0,0,0,0,0,0,0,0}; //9 zero
-        currentPlayerTurn = 1;
+        playerTurn = 1;
         totalSelectedBoxes = 1;
 
         binding.image1.setImageResource(R.drawable.white_box);
