@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
         binding.image2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -158,10 +157,10 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < combinationList.size(); i++){
             final int[] combination = combinationList.get(i);
 
-            if (boxPositions[combination[0]] == playerTurn && boxPositions[combination[1]] == playerTurn &&
-                    boxPositions[combination[2]] == playerTurn) {
+            if (boxPositions[combination[0]] == playerTurn && boxPositions[combination[1]] == playerTurn && boxPositions[combination[2]] == playerTurn) {
                 response = true;
             }
+
         }
         return response;
     }
