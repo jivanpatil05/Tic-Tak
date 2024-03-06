@@ -11,7 +11,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
-    private final List<int[]> combinationList = new ArrayList<>();
+    private final List<int[]> CombinationList = new ArrayList<>();
     private int[] boxPositions = {0,0,0,0,0,0,0,0,0}; //9 zero
     private int playerTurn = 1;
     private int totalSelectedBoxes = 1;
@@ -22,14 +22,15 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        combinationList.add(new int[] {0,1,2});
-        combinationList.add(new int[] {3,4,5});
-        combinationList.add(new int[] {6,7,8});
-        combinationList.add(new int[] {0,3,6});
-        combinationList.add(new int[] {1,4,7});
-        combinationList.add(new int[] {2,5,8});
-        combinationList.add(new int[] {2,4,6});
-        combinationList.add(new int[] {0,4,8});
+        CombinationList.add(new int[] {0,1,2});
+        CombinationList.add(new int[] {3,4,5});
+        CombinationList.add(new int[] {6,7,8});
+        CombinationList.add(new int[] {0,3,6});
+        CombinationList.add(new int[] {1,4,7});
+        CombinationList.add(new int[] {2,5,8});
+        CombinationList.add(new int[] {2,4,6});
+        CombinationList.add(new int[] {0,4,8});
+
 
 
         binding.image1.setOnClickListener(new View.OnClickListener() {
@@ -154,8 +155,8 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean checkResults(){
         boolean response = false;
-        for (int i = 0; i < combinationList.size(); i++){
-            final int[] combination = combinationList.get(i);
+        for (int i = 0; i < CombinationList.size(); i++){
+            final int[] combination = CombinationList.get(i);
 
             if (boxPositions[combination[0]] == playerTurn && boxPositions[combination[1]] == playerTurn && boxPositions[combination[2]] == playerTurn) {
                 response = true;
