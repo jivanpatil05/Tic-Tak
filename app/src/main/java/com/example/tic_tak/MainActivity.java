@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         CombinationList.add(new int[] {0,1,2});
         CombinationList.add(new int[] {0,1,2});
         CombinationList.add(new int[] {3,4,5});
+        CombinationList.add(new int[] {3,4,5});
         CombinationList.add(new int[] {6,7,8});
         CombinationList.add(new int[] {0,3,6});
         CombinationList.add(new int[] {1,4,7});
